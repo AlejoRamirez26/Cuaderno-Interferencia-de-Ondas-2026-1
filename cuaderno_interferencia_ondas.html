@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Oscar Alejandro Ramírez Espinosa, Jeny Maritza Mora Cardona">
+<meta name="copyright" content="© 2026 Oscar Alejandro Ramírez Espinosa y Jeny Maritza Mora Cardona. Todos los derechos reservados.">
+<meta name="description" content="Cuaderno Digital Interactivo: Interferencia de Ondas — Principio de Superposición, Constructiva, Destructiva, Batidos, Young, Aplicaciones Industriales.">
+<meta name="keywords" content="interferencia de ondas, superposición, constructiva, destructiva, batidos, Young, ingeniería industrial, cuaderno interactivo">
+<title>Interferencia de Ondas — Cuaderno Digital · 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Kalam:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0c1820;--paper:#faf7f0;--paper2:#f2ece0;--paper3:#eef4fb;
+  --ink:#1c2b33;--inkm:#3d5260;--inkl:#7a9aaa;
+  --ac:#0e6e8a;--ac2:#c77b1a;--ac3:#1e8a4a;--danger:#b03020;--gold:#c89040;
+  --spine:linear-gradient(to right,#a07840,#f5e0b0,#c89040,#f5e0b0,#a07840);
+  --fd:'Playfair Display',Georgia,serif;--fb:'DM Sans',sans-serif;
+  --fh:'Kalam',cursive;--fm:'JetBrains Mono',monospace;
+  --flip:.78s;
+}
+body.dm{--paper:#1a2530;--paper2:#131d26;--paper3:#12202e;--ink:#dde8ee;--inkm:#8aaabb;--inkl:#4d7080;--bg:#060e12}
+html,body{width:100%;height:100vh;overflow:hidden;font-family:var(--fb);background:var(--bg);color:var(--ink)}
+h1,h2,h3,h4{font-family:var(--fd)}
+
+/* SPLASH */
+#splash{position:fixed;inset:0;z-index:9000;background:linear-gradient(155deg,#061420,#0c2030,#040c10);display:flex;align-items:center;justify-content:center;transition:opacity .9s,visibility .9s}
+#splash.gone{opacity:0;visibility:hidden;pointer-events:none}
+.sc{position:relative;width:min(560px,90vw);padding:42px 38px 34px;border:1.5px solid rgba(200,144,64,.45);border-radius:4px;text-align:center;animation:cIn 1s cubic-bezier(.22,1,.36,1) both;overflow:hidden}
+.sc::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(14,110,138,.16),transparent 70%);pointer-events:none}
+@keyframes cIn{from{opacity:0;transform:translateY(30px) scale(.94)}to{opacity:1;transform:none}}
+.sw{width:100%;height:54px;margin-bottom:4px;overflow:visible}
+.slogo{width:70px;height:70px;border-radius:50%;background:conic-gradient(var(--ac) 0deg 120deg,var(--ac2) 120deg 240deg,var(--ac3) 240deg 360deg);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 14px;box-shadow:0 0 0 6px rgba(255,255,255,.06),0 8px 28px rgba(14,110,138,.4);animation:sp 20s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.st{font-family:var(--fd);font-weight:900;font-size:2rem;color:var(--gold);line-height:1.2;margin-bottom:9px;text-shadow:0 2px 22px rgba(200,144,64,.4)}
+.ss{color:#8ab8cc;font-size:.92rem;line-height:1.6;margin-bottom:16px}
+.sa{font-family:var(--fd);font-style:italic;color:#cce0e8;font-size:1rem;margin-bottom:5px}
+.sy{color:#556;font-size:.8rem;margin-bottom:26px}
+#btnO{background:var(--ac);color:#fff;border:none;padding:13px 40px;font-family:var(--fd);font-weight:700;font-size:1rem;letter-spacing:.5px;border-radius:4px;cursor:pointer;box-shadow:0 4px 22px rgba(14,110,138,.5);transition:all .25s}
+#btnO:hover{background:#0d8aaa;transform:translateY(-2px);box-shadow:0 8px 30px rgba(14,110,138,.6)}
+.scp{color:#334;font-size:.7rem;margin-top:20px;line-height:1.7}
+
+/* TOOLBAR */
+#tb{position:fixed;inset:0 0 auto 0;height:44px;z-index:500;background:rgba(6,14,20,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(14,110,138,.3);display:flex;align-items:center;gap:4px;padding:0 12px;flex-wrap:nowrap;overflow-x:auto}
+#tb::-webkit-scrollbar{height:3px}
+.tbb{font-family:var(--fd);color:var(--gold);font-weight:700;font-size:.88rem;white-space:nowrap;margin-right:5px;flex-shrink:0}
+.tbs{width:1px;height:22px;background:rgba(255,255,255,.12);margin:0 3px;flex-shrink:0}
+.tbx{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#b0ccd8;padding:4px 10px;border-radius:20px;cursor:pointer;font-size:.72rem;font-family:var(--fb);display:flex;align-items:center;gap:3px;transition:all .18s;white-space:nowrap;flex-shrink:0}
+.tbx:hover{background:rgba(14,110,138,.25);border-color:var(--ac);color:#fff}
+.tbx.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.tbx:disabled{opacity:.35;cursor:not-allowed}
+.tbgap{flex:1}
+#pgi{color:#445;font-size:.72rem;white-space:nowrap;font-family:var(--fm)}
+#pw{position:fixed;top:44px;left:0;right:0;height:3px;z-index:499;background:rgba(255,255,255,.04)}
+#pb{height:100%;background:linear-gradient(to right,var(--ac),var(--ac2));transition:width .4s;width:0%}
+
+/* MAIN */
+#main{position:fixed;inset:0;top:47px;display:flex;align-items:center;justify-content:center;padding:12px 18px 64px}
+.nw{position:relative;width:min(94vw,1440px);height:min(84vh,840px)}
+.nb{width:100%;height:100%;display:flex;position:relative;filter:drop-shadow(0 22px 60px rgba(0,0,0,.75));transform-style:preserve-3d}
+
+/* SPINE */
+.spine{position:absolute;left:50%;top:0;bottom:0;width:46px;transform:translateX(-50%);background:var(--spine);z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;padding:16px 0;box-shadow:inset 0 0 12px rgba(0,0,0,.3),0 0 10px rgba(0,0,0,.5)}
+.ring{width:48px;height:11px;border-radius:6px;background:linear-gradient(to bottom,#aaa,#555,#222,#666,#aaa);box-shadow:0 2px 5px rgba(0,0,0,.6),inset 0 1px 2px rgba(255,255,255,.15)}
+.slbl{writing-mode:vertical-rl;font-family:var(--fd);font-weight:700;font-size:.58rem;color:#6b4820;letter-spacing:2.5px;text-transform:uppercase;user-select:none}
+
+/* PAGES */
+.pa{flex:1;height:100%;position:relative;transform-style:preserve-3d;perspective:2600px}
+.page{width:50%;height:100%;position:absolute;top:0;padding:32px 46px 56px;overflow-y:auto;overflow-x:hidden;background:var(--paper);backface-visibility:hidden;scrollbar-width:thin;scrollbar-color:rgba(14,110,138,.3) transparent}
+.page::-webkit-scrollbar{width:4px}
+.page::-webkit-scrollbar-thumb{background:rgba(14,110,138,.3);border-radius:2px}
+.pL{left:0;transform-origin:right center;transform:rotateY(0deg);opacity:0;z-index:1;border-right:1px solid rgba(0,0,0,.06);box-shadow:inset -8px 0 22px rgba(0,0,0,.05),-2px 0 8px rgba(0,0,0,.2)}
+.pR{left:50%;transform-origin:left center;transform:rotateY(0deg);opacity:0;z-index:1;border-left:1px solid rgba(0,0,0,.06);box-shadow:inset 8px 0 22px rgba(0,0,0,.05),2px 0 8px rgba(0,0,0,.2)}
+.pL.on,.pR.on{opacity:1;z-index:5}
+
+/* textures */
+.lined{background-image:repeating-linear-gradient(transparent,transparent 31px,rgba(14,110,138,.18) 31px,rgba(14,110,138,.18) 32px);line-height:32px;background-attachment:local}
+.lined.pL::after{content:'';position:absolute;right:43px;top:0;bottom:0;width:2px;background:rgba(180,60,60,.35);pointer-events:none}
+.lined.pR::after{content:'';position:absolute;left:43px;top:0;bottom:0;width:2px;background:rgba(180,60,60,.35);pointer-events:none}
+.graph{background-image:linear-gradient(rgba(14,110,138,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(14,110,138,.14) 1px,transparent 1px),linear-gradient(rgba(14,110,138,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(14,110,138,.05) 1px,transparent 1px);background-size:50px 50px,50px 50px,10px 10px,10px 10px}
+.plain{background:var(--paper)}
+
+/* watermark */
+.page::before{content:'Ramírez Espinosa · Mora Cardona';position:absolute;bottom:50%;left:50%;transform:translate(-50%,50%) rotate(-28deg);font-family:var(--fd);font-size:1rem;color:rgba(14,110,138,.04);white-space:nowrap;pointer-events:none;z-index:0;user-select:none;letter-spacing:2px}
+
+/* page numbers */
+.pgn{position:absolute;bottom:18px;font-family:var(--fb);font-size:.77rem;color:var(--inkl);font-style:italic}
+.pL .pgn{left:24px}.pR .pgn{right:24px}
+.pgf{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-size:.6rem;color:rgba(14,110,138,.32);white-space:nowrap;font-family:var(--fb)}
+
+/* FLIP */
+@keyframes fNO{0%{transform:rotateY(0deg);opacity:1;z-index:10}49%{transform:rotateY(-91deg);opacity:1;z-index:10}50%{transform:rotateY(-91deg);opacity:0;z-index:1}100%{transform:rotateY(-180deg);opacity:0;z-index:1}}
+@keyframes fNI{0%{transform:rotateY(180deg);opacity:0;z-index:1}49%{transform:rotateY(91deg);opacity:0;z-index:1}50%{transform:rotateY(91deg);opacity:1;z-index:10}100%{transform:rotateY(0deg);opacity:1;z-index:10}}
+@keyframes fPO{0%{transform:rotateY(0deg);opacity:1;z-index:10}49%{transform:rotateY(91deg);opacity:1;z-index:10}50%{transform:rotateY(91deg);opacity:0;z-index:1}100%{transform:rotateY(180deg);opacity:0;z-index:1}}
+@keyframes fPI{0%{transform:rotateY(-180deg);opacity:0;z-index:1}49%{transform:rotateY(-91deg);opacity:0;z-index:1}50%{transform:rotateY(-91deg);opacity:1;z-index:10}100%{transform:rotateY(0deg);opacity:1;z-index:10}}
+.aNO{animation:fNO var(--flip) cubic-bezier(.4,0,.2,1) forwards}
+.aNI{animation:fNI var(--flip) cubic-bezier(.4,0,.2,1) forwards}
+.aPO{animation:fPO var(--flip) cubic-bezier(.4,0,.2,1) forwards}
+.aPI{animation:fPI var(--flip) cubic-bezier(.4,0,.2,1) forwards}
+
+/* NAV BUTTONS */
+.nb-btn{position:absolute;bottom:-52px;background:linear-gradient(135deg,#0c1e28,#061014);color:var(--gold);border:1px solid rgba(200,144,64,.4);padding:9px 24px;border-radius:4px;cursor:pointer;font-family:var(--fb);font-weight:700;font-size:.82rem;transition:all .22s;z-index:100;box-shadow:0 4px 15px rgba(0,0,0,.5)}
+.nb-btn:hover:not(:disabled){border-color:var(--gold);transform:translateY(-2px);background:#0e2030;box-shadow:0 6px 20px rgba(0,0,0,.6)}
+.nb-btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
+#nprev{left:0}#nnext{right:0}#nidx{left:50%;transform:translateX(-50%);padding:9px 16px}
+
+/* TYPOGRAPHY */
+.ptit{font-family:var(--fh);font-size:2.2rem;color:var(--ink);text-align:center;margin:12px 0 5px;line-height:1.2}
+.psub{font-family:var(--fb);font-size:.87rem;color:var(--inkm);text-align:center;margin-bottom:7px}
+.paut{font-family:var(--fd);font-style:italic;text-align:center;color:var(--inkm);font-size:.9rem;margin-bottom:9px}
+h2{font-size:1.22rem;margin:15px 0 7px;color:var(--ac);border-bottom:2px solid var(--ac);padding-bottom:3px}
+h3{font-size:.98rem;margin:11px 0 5px;color:var(--ac2)}
+h4{font-size:.92rem;margin:8px 0 4px;color:var(--inkm)}
+p,li{font-size:.92rem;line-height:1.75;text-align:justify;margin-bottom:.62rem}
+ul,ol{padding-left:1.35rem}li{margin-bottom:3px}
+.hl{background:rgba(200,144,64,.22);padding:1px 4px;border-radius:3px}
+.h2{background:rgba(14,110,138,.15);padding:1px 4px;border-radius:3px}
+.h3{background:rgba(30,138,74,.15);padding:1px 4px;border-radius:3px}
+
+/* BOXES */
+.fbox{background:var(--paper2);border-left:4px solid var(--ac);border-radius:0 5px 5px 0;padding:10px 15px;margin:9px 0;font-size:1.08rem;text-align:center;box-shadow:0 2px 7px rgba(0,0,0,.05)}
+.note{background:rgba(200,144,64,.1);border:1px solid rgba(200,144,64,.38);border-radius:5px;padding:9px 12px;margin:9px 0;font-size:.84rem}
+.note strong{color:var(--ac2)}
+.warn{background:rgba(176,48,32,.08);border:1px solid rgba(176,48,32,.32);border-radius:5px;padding:9px 12px;margin:9px 0;font-size:.84rem}
+.warn strong{color:var(--danger)}
+.tip{background:rgba(30,138,74,.08);border:1px solid rgba(30,138,74,.32);border-radius:5px;padding:9px 12px;margin:9px 0;font-size:.84rem}
+.tip strong{color:var(--ac3)}
+
+/* TABLES */
+table{width:100%;border-collapse:collapse;margin:9px 0;font-size:.84rem}
+th{background:var(--ac);color:#fff;padding:7px 9px;font-family:var(--fb);font-weight:600}
+td{border-bottom:1px solid rgba(0,0,0,.08);padding:5px 9px}
+tr:nth-child(even) td{background:rgba(0,0,0,.025)}
+.illus{width:100%;display:block;margin:9px auto;border-radius:6px}
+hr.d{border:none;border-top:1px dashed rgba(0,0,0,.14);margin:11px 0}
+
+/* INDEX */
+.ir{display:flex;align-items:center;gap:7px;padding:6px 9px;margin-bottom:4px;border-radius:4px;cursor:pointer;border-left:3px solid transparent;transition:all .17s}
+.ir:hover{background:rgba(14,110,138,.1);border-left-color:var(--ac)}
+.in{font-family:var(--fm);font-size:.74rem;color:var(--inkl);min-width:24px}
+.it{font-size:.88rem;font-weight:600;flex:1}
+.id{flex:1;border-bottom:1px dotted rgba(0,0,0,.18);margin:0 7px}
+.ip{font-family:var(--fm);font-size:.74rem;color:var(--inkl)}
+
+/* DASHBOARD */
+.dash{background:rgba(255,255,255,.82);border:1.5px solid #c8c0a8;border-radius:7px;padding:14px;margin:9px 0;box-shadow:0 5px 18px rgba(0,0,0,.06)}
+body.dm .dash{background:rgba(14,30,44,.85);border-color:#2a4050}
+.tl{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:11px}
+.sb{flex:1;min-width:68px;background:var(--paper2);padding:7px 9px;border-radius:5px;text-align:center;border-top:3px solid var(--ac)}
+.sv{font-size:1.12rem;font-weight:700;font-family:var(--fm);color:var(--ink)}
+.sl{font-size:.64rem;color:var(--inkl);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.ct{margin-bottom:10px}
+.ct label{display:flex;justify-content:space-between;font-family:var(--fb);font-weight:600;font-size:.79rem;margin-bottom:3px;color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--ac);cursor:pointer}
+.hbr{display:flex;gap:4px;margin-top:6px}
+.hb{flex:1;padding:5px 0;background:var(--ac);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:700;font-size:.77rem;transition:all .17s}
+.hb:hover,.hb.sel{background:#0a5068;box-shadow:inset 0 2px 4px rgba(0,0,0,.3)}
+.cw{width:100%;height:220px;position:relative;margin-bottom:11px;background:rgba(255,255,255,.75);border-radius:5px;padding:7px;border:1px solid #ddd}
+body.dm .cw{background:rgba(12,22,32,.8);border-color:#1e3044}
+canvas.scv{width:100%;height:300px;background:#fff;border-radius:7px;border:1px solid #ccc;margin-top:9px;display:block}
+body.dm canvas.scv{background:#0a1820;border-color:#1e3044}
+canvas.dcv{width:100%;height:370px;background:#fff;border-radius:7px;border:1px solid #ccc;margin-top:9px;display:block;cursor:crosshair}
+body.dm canvas.dcv{background:#080f16;border-color:#1e3044}
+
+/* QUIZ */
+.qb{background:rgba(0,0,0,.03);border-radius:5px;padding:10px 11px;margin-bottom:8px;font-size:.85rem}
+.qb p{font-weight:700;margin-bottom:6px;font-size:.86rem}
+.qb label{display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:3px}
+.qr{margin-top:4px;font-size:.77rem;font-weight:700}
+.qbtn{width:100%;margin-top:9px;padding:8px;background:var(--ac);color:#fff;border:none;border-radius:4px;cursor:pointer;font-weight:700;font-size:.82rem}
+
+/* CHATBOT */
+#chat{position:fixed;bottom:74px;right:16px;z-index:600;display:flex;flex-direction:column;align-items:flex-end}
+.cfab{width:50px;height:50px;border-radius:50%;background:var(--ac);color:#fff;border:2px solid rgba(255,255,255,.3);font-size:1.32rem;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.4);transition:transform .3s cubic-bezier(.175,.885,.32,1.275)}
+.cfab:hover{transform:scale(1.1)}
+.cp{width:306px;height:405px;background:#fff;border-radius:10px;box-shadow:0 12px 38px rgba(0,0,0,.35);display:none;flex-direction:column;margin-bottom:10px;border:1px solid #ddd;overflow:hidden}
+.cp.open{display:flex}
+.ch{background:var(--ink);color:#fff;padding:11px 12px;display:flex;justify-content:space-between;align-items:center;font-size:.87rem;font-family:var(--fb)}
+.cb{flex:1;padding:10px;overflow-y:auto;display:flex;flex-direction:column;gap:7px;background:#f8f6f0;font-size:.84rem}
+.msg{padding:7px 11px;border-radius:13px;max-width:84%;line-height:1.4}
+.mai{background:var(--ac);color:#fff;align-self:flex-start;border-bottom-left-radius:2px}
+.mu{background:#e8edf0;color:#333;align-self:flex-end;border-bottom-right-radius:2px}
+.ci{display:flex;padding:7px;border-top:1px solid #ddd;gap:5px;background:#fff}
+.ci input{flex:1;padding:6px 10px;border:1px solid #ccc;border-radius:18px;font-size:.82rem;outline:none}
+.ci button{background:var(--ac);color:#fff;border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.92rem}
+
+/* SEARCH */
+#so{position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.65);backdrop-filter:blur(5px);display:none;align-items:flex-start;justify-content:center;padding-top:80px}
+#so.open{display:flex}
+.sb2{background:#fff;border-radius:8px;padding:17px;width:min(480px,90vw);box-shadow:0 20px 55px rgba(0,0,0,.5)}
+.sb2 input{width:100%;padding:9px 12px;border:2px solid var(--ac);border-radius:5px;font-size:.93rem;outline:none}
+#sr{margin-top:9px;max-height:280px;overflow-y:auto}
+.si{padding:8px 10px;border-radius:4px;cursor:pointer;border-left:3px solid transparent;margin-bottom:3px;font-size:.86rem}
+.si:hover{background:rgba(14,110,138,.1);border-left-color:var(--ac)}
+.sp2{font-size:.71rem;color:#888;margin-top:1px}
+
+/* NOTES */
+#np{position:fixed;right:0;top:47px;bottom:0;width:250px;background:#fef9e7;border-left:1px solid rgba(200,144,64,.4);transform:translateX(100%);transition:transform .3s;z-index:400;display:flex;flex-direction:column;padding:13px}
+#np.open{transform:translateX(0)}
+#np h4{font-family:var(--fd);margin-bottom:7px;font-size:.93rem}
+#ntx{flex:1;width:100%;resize:none;border:1px solid #ddd;border-radius:4px;padding:8px;font-family:var(--fh);font-size:.92rem;line-height:1.6;background:#fff;outline:none}
+
+/* TIMER */
+#tw{position:fixed;bottom:74px;left:16px;z-index:400;background:rgba(6,14,20,.9);border:1px solid var(--gold);border-radius:5px;padding:7px 12px;font-family:var(--fm);color:var(--gold);font-size:.8rem;display:none}
+#tw.open{display:flex;align-items:center;gap:7px}
+
+/* COVER */
+.covL{background:linear-gradient(155deg,#061420,#0c2030,#040c10) !important}
+.covR{background:linear-gradient(200deg,#081a25,#0a2030) !important}
+
+/* RESPONSIVE */
+@media(max-width:720px){.nw{width:99vw;height:74vh}.page{padding:16px 20px 48px}.pL{display:none}.pR{width:100%;left:0}.spine{display:none}p,li{font-size:.84rem}h2{font-size:1.02rem}}
+</style>
+</head>
+<body>
+<!-- SPLASH -->
+<div id="splash">
+<div class="sc">
+<svg class="sw" viewBox="0 0 500 54">
+  <path d="M0 27 Q62.5 8 125 27 T250 27 T375 27 T500 27" fill="none" stroke="rgba(14,110,138,.8)" stroke-width="2.5">
+    <animate attributeName="d" values="M0 27 Q62.5 8 125 27 T250 27 T375 27 T500 27;M0 27 Q62.5 46 125 27 T250 27 T375 27 T500 27;M0 27 Q62.5 8 125 27 T250 27 T375 27 T500 27" dur="3s" repeatCount="indefinite"/>
+  </path>
+  <path d="M0 27 Q62.5 46 125 27 T250 27 T375 27 T500 27" fill="none" stroke="rgba(200,144,64,.5)" stroke-width="1.8">
+    <animate attributeName="d" values="M0 27 Q62.5 46 125 27 T250 27 T375 27 T500 27;M0 27 Q62.5 8 125 27 T250 27 T375 27 T500 27;M0 27 Q62.5 46 125 27 T250 27 T375 27 T500 27" dur="2.1s" repeatCount="indefinite"/>
+  </path>
+  <path d="M0 27 Q62.5 14 125 27 T250 27 T375 27 T500 27" fill="none" stroke="rgba(30,138,74,.4)" stroke-width="1.2">
+    <animate attributeName="d" values="M0 27 Q62.5 14 125 27 T250 27 T375 27 T500 27;M0 27 Q62.5 40 125 27 T250 27 T375 27 T500 27;M0 27 Q62.5 14 125 27 T250 27 T375 27 T500 27" dur="1.7s" repeatCount="indefinite"/>
+  </path>
+</svg>
+<div class="slogo">〰️</div>
+<div class="st">Interferencia de Ondas</div>
+<div class="ss">Principio de Superposición · Interferencia Constructiva y Destructiva<br>Batidos Acústicos · Experimento de Young · Aplicaciones Industriales</div>
+<div class="sa">Oscar Alejandro Ramírez Espinosa<br>Jeny Maritza Mora Cardona</div>
+<div class="sy">Cuaderno Digital Interactivo · 2026</div>
+<button id="btnO" onclick="openBook()">📖 Abrir Cuaderno</button>
+<div class="scp">© 2026 Oscar Alejandro Ramírez Espinosa y Jeny Maritza Mora Cardona.<br>Todos los derechos reservados.</div>
+</div>
+</div>
+
+<!-- TOOLBAR -->
+<div id="tb">
+  <span class="tbb">📚 Interferencia de Ondas</span>
+  <div class="tbs"></div>
+  <button class="tbx" id="tp" onclick="flip(-1)" disabled>◀ Anterior</button>
+  <button class="tbx" onclick="gIdx()">📋 Índice</button>
+  <button class="tbx" id="tn" onclick="flip(1)">Siguiente ▶</button>
+  <div class="tbs"></div>
+  <button class="tbx" onclick="tSrch()">🔍 Buscar</button>
+  <button class="tbx" onclick="tNotes()">📝 Notas</button>
+  <button class="tbx" onclick="tTimer()">⏱ Tiempo</button>
+  <button class="tbx" onclick="document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()">⛶ Pantalla</button>
+  <div class="tbs"></div>
+  <button class="tbx" id="tdm" onclick="tDM()">🌙 Oscuro</button>
+  <button class="tbx" onclick="window.print()">🖨 Imprimir</button>
+  <button class="tbx" onclick="doShot()">📸 Captura</button>
+  <div class="tbgap"></div>
+  <span id="pgi">Portada</span>
+</div>
+<div id="pw"><div id="pb"></div></div>
+
+<!-- MAIN BOOK -->
+<div id="main">
+<div class="nw">
+<div class="nb" id="nbc">
+<div class="spine" id="spn"><span class="slbl">Interferencia · 2026</span></div>
+<div class="pa">
+<!-- ===== SPREAD 0: PORTADA + CREDITOS ===== -->
+<div class="page pL covL on" id="s0L" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+  <svg viewBox="0 0 300 300" width="220" style="margin-bottom:12px;">
+    <circle cx="100" cy="150" r="22" fill="none" stroke="rgba(14,110,138,.75)" stroke-width="1.5"/>
+    <circle cx="100" cy="150" r="46" fill="none" stroke="rgba(14,110,138,.55)" stroke-width="1.2"/>
+    <circle cx="100" cy="150" r="72" fill="none" stroke="rgba(14,110,138,.38)" stroke-width="1.0"/>
+    <circle cx="100" cy="150" r="100" fill="none" stroke="rgba(14,110,138,.22)" stroke-width=".8"/>
+    <circle cx="100" cy="150" r="130" fill="none" stroke="rgba(14,110,138,.12)" stroke-width=".6"/>
+    <circle cx="200" cy="150" r="22" fill="none" stroke="rgba(200,144,64,.75)" stroke-width="1.5"/>
+    <circle cx="200" cy="150" r="46" fill="none" stroke="rgba(200,144,64,.55)" stroke-width="1.2"/>
+    <circle cx="200" cy="150" r="72" fill="none" stroke="rgba(200,144,64,.38)" stroke-width="1.0"/>
+    <circle cx="200" cy="150" r="100" fill="none" stroke="rgba(200,144,64,.22)" stroke-width=".8"/>
+    <circle cx="200" cy="150" r="130" fill="none" stroke="rgba(200,144,64,.12)" stroke-width=".6"/>
+    <circle cx="100" cy="150" r="5" fill="rgba(14,110,138,.95)"/>
+    <circle cx="200" cy="150" r="5" fill="rgba(200,144,64,.95)"/>
+    <text x="150" y="18" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="rgba(255,255,255,.45)">Doble Rendija — Young 1801</text>
+    <text x="150" y="288" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(14,110,138,.55)">Δr = mλ → constructiva</text>
+  </svg>
+  <div style="font-family:'Playfair Display',serif;color:var(--gold);font-size:1.8rem;font-weight:900;text-align:center;line-height:1.2;">Interferencia<br>de Ondas</div>
+  <div style="color:#4a7888;font-size:.79rem;text-align:center;margin:9px 0 14px;line-height:1.5;">Superposición · Constructiva · Destructiva<br><span style="color:#2a3840;">Ingeniería Industrial · 2026</span></div>
+  <div style="color:rgba(200,144,64,.38);font-size:.63rem;border-top:1px solid rgba(200,144,64,.16);padding-top:7px;width:78%;text-align:center;">PORTADA</div>
+  <div class="pgn" style="color:rgba(200,144,64,.35);">i</div>
+</div>
+
+<div class="page pR covR on" id="s0R" style="display:flex;flex-direction:column;justify-content:center;">
+  <div style="border:1.5px solid rgba(200,144,64,.4);border-radius:4px;padding:20px;margin:16px;text-align:center;">
+    <div style="font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:var(--ac);margin-bottom:13px;">Créditos</div>
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:.98rem;color:#9ab;margin-bottom:4px;">Oscar Alejandro Ramírez Espinosa</div>
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:.98rem;color:#9ab;margin-bottom:16px;">Jeny Maritza Mora Cardona</div>
+    <hr style="border:none;border-top:1px solid rgba(255,255,255,.06);margin-bottom:13px;">
+    <p style="font-size:.79rem;color:#6a8898;text-align:center;line-height:1.7;">Cuaderno digital interactivo para el estudio de la <strong style="color:#9ab;">Interferencia de Ondas</strong> en el programa de Ingeniería Industrial.<br><br>Contiene fundamentos teóricos rigurosos, simulaciones en tiempo real, batidos acústicos con síntesis de audio, simulación 2D del experimento de Young y aplicaciones prácticas en ingeniería.</p>
+    <hr style="border:none;border-top:1px solid rgba(255,255,255,.06);margin:13px 0;">
+    <div style="font-size:.69rem;color:#334;line-height:1.8;">© 2026 Oscar Alejandro Ramírez Espinosa<br>y Jeny Maritza Mora Cardona.<br>Todos los derechos reservados.<br>Prohibida la reproducción sin autorización expresa.</div>
+  </div>
+  <div class="pgn" style="color:rgba(200,144,64,.35);">ii</div>
+</div>
+<!-- ===== SPREAD 1: ÍNDICE + PRESENTACIÓN ===== -->
+<div class="page pL lined" id="s1L">
+  <h2 style="margin-top:5px;">Índice de Contenidos</h2>
+  <div class="ir" onclick="gSpread(2)"><span class="in">01</span><span class="it">Principio de Superposición</span><span class="id"></span><span class="ip">1</span></div>
+  <div class="ir" onclick="gSpread(2)"><span class="in">02</span><span class="it">Tipos de Interferencia</span><span class="id"></span><span class="ip">2</span></div>
+  <div class="ir" onclick="gSpread(3)"><span class="in">03</span><span class="it">Condición Constructiva — Diferencia de Camino</span><span class="id"></span><span class="ip">3</span></div>
+  <div class="ir" onclick="gSpread(3)"><span class="in">04</span><span class="it">Condición Destructiva — Fasores</span><span class="id"></span><span class="ip">4</span></div>
+  <div class="ir" onclick="gSpread(4)"><span class="in">05</span><span class="it">Panel de Control — Simulación 1D</span><span class="id"></span><span class="ip">5</span></div>
+  <div class="ir" onclick="gSpread(4)"><span class="in">06</span><span class="it">Simulación Analítica de Superposición</span><span class="id"></span><span class="ip">6</span></div>
+  <div class="ir" onclick="gSpread(5)"><span class="in">07</span><span class="it">Batidos Acústicos — Teoría Completa</span><span class="id"></span><span class="ip">7</span></div>
+  <div class="ir" onclick="gSpread(5)"><span class="in">08</span><span class="it">Simulador de Batidos con Audio</span><span class="id"></span><span class="ip">8</span></div>
+  <div class="ir" onclick="gSpread(6)"><span class="in">09</span><span class="it">Experimento de Young — Doble Rendija</span><span class="id"></span><span class="ip">9</span></div>
+  <div class="ir" onclick="gSpread(6)"><span class="in">10</span><span class="it">Simulación 2D del Patrón de Interferencia</span><span class="id"></span><span class="ip">10</span></div>
+  <div class="ir" onclick="gSpread(7)"><span class="in">11</span><span class="it">Telemetría y Espectro de Frecuencias</span><span class="id"></span><span class="ip">11</span></div>
+  <div class="ir" onclick="gSpread(7)"><span class="in">12</span><span class="it">Aplicaciones Industriales y Tecnológicas</span><span class="id"></span><span class="ip">12</span></div>
+  <div class="ir" onclick="gSpread(8)"><span class="in">13</span><span class="it">Autoevaluación — 5 Preguntas</span><span class="id"></span><span class="ip">13</span></div>
+  <div class="ir" onclick="gSpread(8)"><span class="in">14</span><span class="it">Glosario y Referencias Bibliográficas</span><span class="id"></span><span class="ip">14</span></div>
+  <div class="pgn">iii</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+<div class="page pR lined" id="s1R">
+  <div class="ptit">Interferencia de Ondas</div>
+  <div class="paut">Oscar Alejandro Ramírez Espinosa · Jeny Maritza Mora Cardona</div>
+  <div class="psub">Superposición · Constructiva · Destructiva · Young · Batidos · Ingeniería Industrial · 2026</div>
+  <hr class="d">
+  <svg class="illus" viewBox="0 0 440 165" style="height:152px;">
+    <text x="220" y="14" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="700" font-size="11" fill="#3d5260">Superposición de Dos Ondas Armónicas</text>
+    <path d="M18 55 Q73 28 128 55 T238 55 T348 55 T418 55" fill="none" stroke="rgba(14,110,138,.8)" stroke-width="2.2">
+      <animate attributeName="d" values="M18 55 Q73 28 128 55 T238 55 T348 55 T418 55;M18 55 Q73 82 128 55 T238 55 T348 55 T418 55;M18 55 Q73 28 128 55 T238 55 T348 55 T418 55" dur="2.4s" repeatCount="indefinite"/>
+    </path>
+    <text x="18" y="48" font-size="9" fill="rgba(14,110,138,.85)" font-family="DM Sans,sans-serif">y₁ = A·cos(kx − ω₁t)</text>
+    <path d="M18 98 Q73 71 128 98 T238 98 T348 98 T418 98" fill="none" stroke="rgba(200,144,64,.8)" stroke-width="2.2">
+      <animate attributeName="d" values="M18 98 Q73 71 128 98 T238 98 T348 98 T418 98;M18 98 Q73 125 128 98 T238 98 T348 98 T418 98;M18 98 Q73 71 128 98 T238 98 T348 98 T418 98" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <text x="18" y="118" font-size="9" fill="rgba(200,144,64,.9)" font-family="DM Sans,sans-serif">y₂ = A·cos(kx − ω₂t + φ)</text>
+    <path d="M18 140 L418 140" fill="none" stroke="rgba(30,138,74,.9)" stroke-width="3">
+      <animate attributeName="d" values="M18 140 L418 140;M18 140 Q108 112 218 140 T418 140;M18 140 Q108 168 218 140 T418 140;M18 140 Q108 112 218 140 T418 140;M18 140 L418 140" dur="3.2s" repeatCount="indefinite"/>
+    </path>
+    <text x="18" y="158" font-size="9" fill="rgba(30,138,74,.9)" font-family="DM Sans,sans-serif">y = y₁ + y₂  (Principio de Superposición)</text>
+  </svg>
+  <div class="note">
+    <strong>🎯 Objetivo:</strong> Comprender el Principio de Superposición y los fenómenos de interferencia constructiva, destructiva y batidos, con sus implicaciones en ingeniería y tecnología moderna.
+  </div>
+  <div class="tip">
+    <strong>🗺 Cómo usar este cuaderno:</strong> Usa ◀ ▶ o las teclas de flecha para navegar. El panel izquierdo tiene teoría; el derecho, simulaciones interactivas. El chatbot responde dudas específicas del tema.
+  </div>
+  <div class="pgn">iv</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+<!-- ===== SPREAD 2: SUPERPOSICIÓN + TIPOS ===== -->
+<div class="page pL lined" id="s2L">
+  <h2>1. Principio de Superposición</h2>
+  <p>El <span class="hl"><strong>Principio de Superposición</strong></span> establece que cuando dos o más ondas se encuentran simultáneamente en un punto del espacio, el desplazamiento resultante en ese punto es la <em>suma algebraica</em> de los desplazamientos individuales:</p>
+  <div class="fbox">\[ y_{total}(x,t) = \sum_{i=1}^{n} y_i(x,t) \]</div>
+  <p>Este principio es válido para <strong>medios lineales</strong>, donde la respuesta del medio es proporcional a la excitación y se cumple la ecuación de onda lineal. La mayoría de medios elásticos lo satisfacen a amplitudes pequeñas.</p>
+
+  <h3>1.1 Dos Ondas Armónicas en el Mismo Sentido</h3>
+  <p>Sean dos ondas de igual número de onda \(k\) y frecuencia \(\omega\), con diferencia de fase \(\varphi\):</p>
+  <div class="fbox">\[ y_1 = A_1\cos(kx-\omega t), \quad y_2 = A_2\cos(kx-\omega t+\varphi) \]</div>
+  <p>La onda resultante es también armónica con la misma frecuencia:</p>
+  <div class="fbox">\[ y = A_R\cos(kx-\omega t+\delta) \]</div>
+  <p>donde la <span class="h2">amplitud resultante</span> y la <span class="hl">fase resultante</span> son:</p>
+  <div class="fbox">\[ A_R = \sqrt{A_1^2+A_2^2+2A_1A_2\cos\varphi}, \qquad \tan\delta = \frac{A_2\sin\varphi}{A_1+A_2\cos\varphi} \]</div>
+
+  <h3>1.2 Representación con Fasores</h3>
+  <p>Cada onda se representa como un vector (fasor) de módulo igual a su amplitud. La superposición se obtiene sumando vectorialmente los fasores. Esta representación simplifica enormemente el análisis de sistemas de múltiples fuentes.</p>
+  <div class="note">
+    <strong>💡 Caso especial A₁ = A₂ = A:</strong> La amplitud resultante simplifica a \(A_R = 2A\cos(\varphi/2)\), con \(A_R \in [0, 2A]\) dependiendo únicamente del desfase.
+  </div>
+  <div class="pgn">1</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+<div class="page pR lined" id="s2R">
+  <h2>2. Tipos de Interferencia</h2>
+  <p>La naturaleza de la interferencia depende exclusivamente de la <span class="hl"><strong>diferencia de fase</strong></span> \(\varphi\) entre las ondas superpuestas.</p>
+
+  <h3>2.1 Interferencia Constructiva</h3>
+  <p>Ocurre cuando las ondas están <span class="h3">en fase</span> (\(\varphi = 0, 2\pi, 4\pi, \ldots\)). Los desplazamientos se suman, generando amplitud máxima:</p>
+  <div class="fbox">\[ \varphi = 2m\pi \;\Rightarrow\; A_R = A_1+A_2 \;\Rightarrow\; A_R^{max}=2A \]</div>
+  <svg class="illus" viewBox="0 0 420 82" style="height:75px;background:rgba(30,138,74,.05);border-radius:6px;">
+    <text x="210" y="13" text-anchor="middle" font-size="10" font-family="DM Sans,sans-serif" fill="rgba(30,138,74,.9)" font-weight="700">Constructiva — φ = 0 → A_R = 2A</text>
+    <path d="M18 42 Q105 18 210 42 T402 42" fill="none" stroke="rgba(14,110,138,.55)" stroke-width="1.6" stroke-dasharray="4,3"/>
+    <path d="M18 42 Q105 18 210 42 T402 42" fill="none" stroke="rgba(200,144,64,.55)" stroke-width="1.6" stroke-dasharray="4,3"/>
+    <path d="M18 42 Q105 5 210 42 T402 42" fill="none" stroke="rgba(30,138,74,1)" stroke-width="2.8">
+      <animate attributeName="d" values="M18 42 Q105 5 210 42 T402 42;M18 42 Q105 79 210 42 T402 42;M18 42 Q105 5 210 42 T402 42" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <text x="410" y="46" font-size="9" fill="rgba(30,138,74,.9)" font-family="DM Sans,sans-serif">2A ✓</text>
+  </svg>
+
+  <h3>2.2 Interferencia Destructiva</h3>
+  <p>Ocurre cuando las ondas están en <span class="hl">oposición de fase</span> (\(\varphi = \pi, 3\pi, 5\pi, \ldots\)). Los desplazamientos se cancelan total o parcialmente:</p>
+  <div class="fbox">\[ \varphi = (2m+1)\pi \;\Rightarrow\; A_R = |A_1-A_2| \;\Rightarrow\; A_R=0 \;\text{si } A_1=A_2 \]</div>
+  <svg class="illus" viewBox="0 0 420 82" style="height:75px;background:rgba(176,48,32,.04);border-radius:6px;">
+    <text x="210" y="13" text-anchor="middle" font-size="10" font-family="DM Sans,sans-serif" fill="rgba(176,48,32,.9)" font-weight="700">Destructiva — φ = π → A_R = 0</text>
+    <path d="M18 42 Q105 18 210 42 T402 42" fill="none" stroke="rgba(14,110,138,.55)" stroke-width="1.6" stroke-dasharray="4,3"/>
+    <path d="M18 42 Q105 66 210 42 T402 42" fill="none" stroke="rgba(200,144,64,.55)" stroke-width="1.6" stroke-dasharray="4,3"/>
+    <line x1="18" y1="42" x2="402" y2="42" stroke="rgba(176,48,32,.9)" stroke-width="2.8"/>
+    <text x="410" y="46" font-size="9" fill="rgba(176,48,32,.9)" font-family="DM Sans,sans-serif">0 ✗</text>
+  </svg>
+
+  <h3>2.3 Interferencia Parcial</h3>
+  <p>Para cualquier otro valor de \(\varphi\), la amplitud resultante es intermedia: \(|A_1-A_2| \leq A_R \leq A_1+A_2\). La intensidad resultante es \(I_R = I_1+I_2+2\sqrt{I_1 I_2}\cos\varphi\).</p>
+
+  <div class="warn">
+    <strong>⚠️ Conservación de Energía:</strong> La interferencia destructiva NO destruye energía. La energía se redistribuye espacialmente: donde hay amplitud nula, la energía aparece amplificada en otras regiones.
+  </div>
+  <div class="pgn">2</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+<!-- ===== SPREAD 3: CONDICIONES MATEMÁTICAS + FASORES ===== -->
+<div class="page pL lined" id="s3L">
+  <h2>3. Condición de Interferencia Constructiva</h2>
+  <p>Dos fuentes producen interferencia constructiva cuando la <span class="hl"><strong>diferencia de camino</strong></span> \(\Delta r = r_2 - r_1\) es múltiplo entero de la longitud de onda:</p>
+  <div class="fbox">\[ \Delta r = m\lambda, \quad m = 0, \pm1, \pm2, \ldots \]</div>
+  <p>Equivalentemente, en términos de diferencia de fase:</p>
+  <div class="fbox">\[ \Delta\varphi = \frac{2\pi}{\lambda}\Delta r = 2m\pi \]</div>
+  <table>
+    <thead><tr><th>Orden m</th><th>Δr</th><th>Δφ (rad)</th><th>A_R</th></tr></thead>
+    <tbody>
+      <tr><td>0 (central)</td><td>0</td><td>0</td><td>2A</td></tr>
+      <tr><td>±1</td><td>±λ</td><td>±2π</td><td>2A</td></tr>
+      <tr><td>±2</td><td>±2λ</td><td>±4π</td><td>2A</td></tr>
+      <tr><td>±m</td><td>±mλ</td><td>±2mπ</td><td>2A</td></tr>
+    </tbody>
+  </table>
+  <h3>3.1 Coherencia de Fuentes</h3>
+  <p>Para que la interferencia sea estable y observable, las fuentes deben ser <span class="h2"><strong>coherentes</strong></span>:</p>
+  <ul>
+    <li><strong>Coherencia temporal:</strong> diferencia de fase constante en el tiempo (misma frecuencia).</li>
+    <li><strong>Coherencia espacial:</strong> frentes de onda suficientemente uniformes.</li>
+  </ul>
+  <div class="note">
+    <strong>Longitud de coherencia:</strong> Distancia máxima sobre la que la fuente mantiene fase definida. Láser: ~km. LED: ~µm. Luz solar: ~0.6 µm.
+  </div>
+  <h3>3.2 Métodos para obtener fuentes coherentes</h3>
+  <ul>
+    <li><strong>División de frente de onda:</strong> Experimento de Young (rendijas).</li>
+    <li><strong>División de amplitud:</strong> Películas delgadas, interferómetro de Michelson.</li>
+  </ul>
+  <div class="pgn">3</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+<div class="page pR lined" id="s3R">
+  <h2>4. Condición Destructiva y Diagrama Fasorial</h2>
+  <p>La interferencia destructiva total ocurre cuando la diferencia de camino es semientero de longitud de onda:</p>
+  <div class="fbox">\[ \Delta r = \left(m+\tfrac{1}{2}\right)\lambda, \quad m = 0,\pm1,\pm2,\ldots \]</div>
+  <div class="fbox">\[ \Delta\varphi = (2m+1)\pi \]</div>
+  <table>
+    <thead><tr><th>Orden m</th><th>Δr</th><th>Δφ (rad)</th><th>A_R</th></tr></thead>
+    <tbody>
+      <tr><td>0</td><td>λ/2</td><td>π</td><td>0</td></tr>
+      <tr><td>±1</td><td>±3λ/2</td><td>±3π</td><td>0</td></tr>
+      <tr><td>m</td><td>(m+½)λ</td><td>(2m+1)π</td><td>0</td></tr>
+    </tbody>
+  </table>
+  <h3>4.1 Diagrama Fasorial Comparativo</h3>
+  <svg class="illus" viewBox="0 0 420 155" style="height:142px;background:var(--paper2);border-radius:6px;">
+    <defs><marker id="ar" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M0,0 L0,5 L7,2.5 z" fill="#999"/></marker></defs>
+    <text x="108" y="16" text-anchor="middle" font-size="10" font-weight="700" font-family="DM Sans,sans-serif" fill="#1e8a4a">Constructiva (φ=0)</text>
+    <text x="308" y="16" text-anchor="middle" font-size="10" font-weight="700" font-family="DM Sans,sans-serif" fill="#b03020">Destructiva (φ=π)</text>
+    <circle cx="108" cy="92" r="2" fill="#555"/>
+    <line x1="108" y1="92" x2="152" y2="62" stroke="rgba(14,110,138,.85)" stroke-width="2.5" marker-end="url(#ar)"/>
+    <line x1="152" y1="62" x2="196" y2="32" stroke="rgba(200,144,64,.85)" stroke-width="2.5" marker-end="url(#ar)"/>
+    <line x1="108" y1="92" x2="196" y2="32" stroke="rgba(30,138,74,1)" stroke-width="1.8" stroke-dasharray="5,3"/>
+    <text x="200" y="36" font-size="9" fill="#1e8a4a" font-family="DM Sans">A_R=2A</text>
+    <circle cx="308" cy="92" r="2" fill="#555"/>
+    <line x1="308" y1="92" x2="352" y2="62" stroke="rgba(14,110,138,.85)" stroke-width="2.5" marker-end="url(#ar)"/>
+    <line x1="352" y1="62" x2="308" y2="92" stroke="rgba(200,144,64,.85)" stroke-width="2.5" marker-end="url(#ar)"/>
+    <circle cx="308" cy="92" r="6" fill="rgba(176,48,32,.7)"/>
+    <text x="372" y="78" font-size="9" fill="#b03020" font-family="DM Sans">A_R=0</text>
+    <text x="108" y="146" text-anchor="middle" font-size="8" fill="#888" font-family="DM Sans">Vectores en fase → se suman</text>
+    <text x="308" y="146" text-anchor="middle" font-size="8" fill="#888" font-family="DM Sans">Vectores opuestos → se cancelan</text>
+  </svg>
+  <div class="tip">
+    <strong>🎵 Batidos:</strong> Cuando \(f_1 \approx f_2\), la interferencia no es estacionaria: produce una <em>modulación lenta de amplitud</em> con frecuencia \(f_b = |f_1 - f_2|\). Es el fenómeno que usan los músicos para afinar instrumentos.
+  </div>
+  <div class="note">
+    <strong>Intensidad en Young:</strong> \(I(\theta)=4I_0\cos^2\!\left(\tfrac{\pi d\sin\theta}{\lambda}\right)\). Los máximos ocurren donde \(d\sin\theta=m\lambda\).
+  </div>
+  <div class="pgn">4</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+<!-- ===== SPREAD 4: PANEL CONTROL + SIMULACION 1D ===== -->
+<div class="page pL lined" id="s4L">
+  <h2>5. Panel de Control — Simulación 1D</h2>
+  <p>Ajusta las dos ondas armónicas para observar el resultado de su superposición en tiempo real. Modifica amplitud, frecuencia y fase de cada onda.</p>
+  <div class="dash">
+    <div class="tl">
+      <div class="sb"><div class="sv" id="vAr">2.00</div><div class="sl">A_R (norm)</div></div>
+      <div class="sb"><div class="sv" id="vPhi">0°</div><div class="sl">Δφ</div></div>
+      <div class="sb"><div class="sv" id="vTipo">Const.</div><div class="sl">Tipo</div></div>
+      <div class="sb"><div class="sv" id="vFb">—</div><div class="sl">f_bat (Hz)</div></div>
+    </div>
+    <div class="ct">
+      <label>Amplitud A₁ <span id="lA1">1.00</span></label>
+      <input type="range" id="sA1" min="0.1" max="2" step="0.05" value="1" oninput="updSim()">
+    </div>
+    <div class="ct">
+      <label>Amplitud A₂ <span id="lA2">1.00</span></label>
+      <input type="range" id="sA2" min="0.1" max="2" step="0.05" value="1" oninput="updSim()">
+    </div>
+    <div class="ct">
+      <label>Frecuencia f₁ (Hz) <span id="lF1">2.0</span></label>
+      <input type="range" id="sF1" min="0.5" max="10" step="0.1" value="2" oninput="updSim()">
+    </div>
+    <div class="ct">
+      <label>Frecuencia f₂ (Hz) <span id="lF2">2.0</span></label>
+      <input type="range" id="sF2" min="0.5" max="10" step="0.1" value="2" oninput="updSim()">
+    </div>
+    <div class="ct">
+      <label>Diferencia de fase Δφ <span id="lPhi">0°</span></label>
+      <input type="range" id="sPhi" min="0" max="360" step="1" value="0" oninput="updSim()">
+    </div>
+    <div class="hbr">
+      <button class="hb sel" onclick="setP('const',this)">Constructiva</button>
+      <button class="hb" onclick="setP('dest',this)">Destructiva</button>
+      <button class="hb" onclick="setP('beat',this)">Batidos</button>
+      <button class="hb" onclick="setP('part',this)">Parcial</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:7px;margin-top:8px;font-size:.79rem;border-top:1px dashed #ccc;padding-top:7px;">
+      <input type="checkbox" id="chkC"> <label for="chkC">Mostrar ondas individuales</label>
+    </div>
+  </div>
+  <div class="pgn">5</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+<div class="page pR graph" id="s4R">
+  <h2>6. Simulación Analítica de Superposición</h2>
+  <canvas class="scv" id="simCV" style="height:280px;"></canvas>
+  <p style="margin-top:9px;font-size:.83rem;color:var(--inkm);">La onda oscura muestra la superposición \(y_1+y_2\). Activa "Mostrar ondas individuales" para ver las componentes en colores. Usa los preajustes del panel izquierdo para explorar cada tipo.</p>
+  <div class="note" style="margin-top:7px;">
+    <strong>💡 Prueba:</strong> Selecciona <em>Batidos</em> y observa la modulación lenta de la amplitud: es el fenómeno que los músicos usan para afinar sus instrumentos al escuchar las pulsaciones rítmicas.
+  </div>
+  <div class="warn" style="margin-top:6px;">
+    <strong>Ojo:</strong> Con preset <em>Destructiva</em> la amplitud resultante cae a cero. Con <em>Parcial</em> (φ=90°) el resultado es \(A_R=\sqrt{2}\,A\), a mitad de camino entre los dos extremos.
+  </div>
+  <div class="pgn">6</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+<!-- ===== SPREAD 5: BATIDOS TEORIA + SIMULADOR ===== -->
+<div class="page pL lined" id="s5L">
+  <h2>7. Batidos Acústicos — Teoría Completa</h2>
+  <p>Los <span class="hl"><strong>batidos</strong></span> son el resultado de superponer dos ondas de amplitud igual pero frecuencias ligeramente distintas \(f_1\) y \(f_2\). Aplicando la identidad trigonométrica \(\cos\alpha+\cos\beta=2\cos\frac{\alpha-\beta}{2}\cos\frac{\alpha+\beta}{2}\):</p>
+  <div class="fbox">\[ y = 2A\cos\!\bigl(\pi(f_1-f_2)t\bigr)\cdot\cos\!\bigl(\pi(f_1+f_2)t\bigr) \]</div>
+  <p>Esta expresión revela dos oscilaciones simultáneas:</p>
+  <ul>
+    <li><span class="h2"><strong>Envolvente lenta:</strong></span> \(\cos(\pi f_b t)\) con \(f_b = |f_1-f_2|\) — modula la amplitud.</li>
+    <li><span class="hl"><strong>Portadora rápida:</strong></span> \(\cos(\pi(f_1+f_2)t)\) — frecuencia promedio audible.</li>
+  </ul>
+  <div class="fbox">\[ f_{\text{batido}} = |f_1 - f_2|, \qquad T_{\text{batido}} = \frac{1}{|f_1-f_2|} \]</div>
+  <h3>7.1 Intensidad y Percepción</h3>
+  <p>La intensidad varía como \(I(t)=4A^2\cos^2(\pi f_b t)\), pulsando al doble de \(f_b\). El oído percibe batidos diferenciados hasta \(f_b \approx 15\) Hz.</p>
+  <table>
+    <thead><tr><th>Δf (Hz)</th><th>Percepción auditiva</th><th>Aplicación</th></tr></thead>
+    <tbody>
+      <tr><td>0 – 2</td><td>Batidos lentos, muy claros</td><td>Afinación fina</td></tr>
+      <tr><td>2 – 7</td><td>Batidos nítidos</td><td>Verificación de afinación</td></tr>
+      <tr><td>7 – 15</td><td>Vibrato / trémolo</td><td>Efectos musicales</td></tr>
+      <tr><td>&gt; 15</td><td>Disonancia / dos tonos</td><td>Detección de desafinado</td></tr>
+    </tbody>
+  </table>
+  <div class="tip">
+    <strong>🎸 Ejemplo práctico:</strong> Al afinar una guitarra junto a un La4 de referencia (440 Hz), si la cuerda suena a 437 Hz se escuchan 3 batidos/s. Al ajustar la cuerda hasta que los batidos desaparecen, la frecuencia es exactamente 440 Hz.
+  </div>
+  <div class="pgn">7</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+<div class="page pR graph" id="s5R">
+  <h2>8. Simulador de Batidos con Audio</h2>
+  <p style="font-size:.83rem;color:var(--inkm);">Ajusta las frecuencias para generar batidos. Activa el audio para escuchar el efecto real en tiempo real con Web Audio API.</p>
+  <div class="dash" style="padding:11px;">
+    <div class="tl">
+      <div class="sb"><div class="sv" id="vBf1">2.0</div><div class="sl">f₁ (Hz)</div></div>
+      <div class="sb"><div class="sv" id="vBf2">2.5</div><div class="sl">f₂ (Hz)</div></div>
+      <div class="sb"><div class="sv" id="vBfb">0.5</div><div class="sl">f_bat (Hz)</div></div>
+      <div class="sb"><div class="sv" id="vBT">2.0</div><div class="sl">T_bat (s)</div></div>
+    </div>
+    <div class="ct">
+      <label>Frecuencia 1 (f₁) <span id="lBf1">2.0 Hz</span></label>
+      <input type="range" id="sBf1" min="1" max="12" step="0.1" value="2" oninput="updB()">
+    </div>
+    <div class="ct">
+      <label>Frecuencia 2 (f₂) <span id="lBf2">2.5 Hz</span></label>
+      <input type="range" id="sBf2" min="1" max="12" step="0.1" value="2.5" oninput="updB()">
+    </div>
+    <div class="ct">
+      <label>Amplitud <span id="lBamp">1.0</span></label>
+      <input type="range" id="sBamp" min="0.2" max="1" step="0.05" value="1" oninput="updB()">
+    </div>
+    <button id="btnAud" onclick="togAudio()"
+      style="width:100%;padding:7px;background:var(--ac2);color:#fff;border:none;border-radius:4px;cursor:pointer;font-weight:700;font-size:.81rem;margin-top:4px;">
+      Activar Audio de Batidos
+    </button>
+  </div>
+  <div class="cw" style="height:195px;">
+    <canvas id="beatCh"></canvas>
+  </div>
+  <div class="pgn">8</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+<!-- ===== SPREAD 6: YOUNG + SIMULACION 2D ===== -->
+<div class="page pL lined" id="s6L">
+  <h2>9. Experimento de Young — Doble Rendija</h2>
+  <p>El experimento de <strong>Thomas Young (1801)</strong> demostró por primera vez la naturaleza ondulatoria de la luz. Dos rendijas separadas una distancia \(d\), iluminadas por fuente coherente, producen un patrón de franjas en pantalla a distancia \(L\).</p>
+  <svg class="illus" viewBox="0 0 420 175" style="height:160px;background:#f0f6fc;border-radius:7px;">
+    <defs><marker id="ar2" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M0,0 L0,5 L6,2.5 z" fill="#aaa"/></marker></defs>
+    <text x="200" y="14" text-anchor="middle" font-size="11" font-weight="700" font-family="DM Sans,sans-serif" fill="#1c2b33">Experimento de Young</text>
+    <!-- barrier -->
+    <rect x="105" y="28" width="8" height="52" fill="#3d5260" rx="1"/>
+    <rect x="105" y="95" width="8" height="52" fill="#3d5260" rx="1"/>
+    <circle cx="109" cy="80" r="4" fill="rgba(14,110,138,.85)"/>
+    <circle cx="109" cy="95" r="4" fill="rgba(200,144,64,.85)"/>
+    <text x="80" y="14" font-size="8" fill="#3d5260" font-family="DM Sans">Barrera</text>
+    <!-- ripples slit 1 -->
+    <path d="M109,80 Q180,52 250,80" fill="none" stroke="rgba(14,110,138,.55)" stroke-width="1.2"/>
+    <path d="M109,80 Q200,32 300,80" fill="none" stroke="rgba(14,110,138,.38)" stroke-width="1"/>
+    <path d="M109,80 Q220,12 350,80" fill="none" stroke="rgba(14,110,138,.22)" stroke-width=".8"/>
+    <!-- ripples slit 2 -->
+    <path d="M109,95 Q180,123 250,95" fill="none" stroke="rgba(200,144,64,.55)" stroke-width="1.2"/>
+    <path d="M109,95 Q200,143 300,95" fill="none" stroke="rgba(200,144,64,.38)" stroke-width="1"/>
+    <path d="M109,95 Q220,163 350,95" fill="none" stroke="rgba(200,144,64,.22)" stroke-width=".8"/>
+    <!-- screen -->
+    <rect x="385" y="18" width="7" height="140" fill="#b0c0cc" rx="1"/>
+    <!-- fringes -->
+    <rect x="388" y="36" width="4" height="7" fill="rgba(14,110,138,.9)" rx="1"/>
+    <rect x="388" y="55" width="4" height="6" fill="rgba(14,110,138,.45)" rx="1"/>
+    <rect x="388" y="72" width="4" height="8" fill="rgba(14,110,138,.9)" rx="1"/>
+    <rect x="388" y="91" width="4" height="8" fill="rgba(14,110,138,.9)" rx="1"/>
+    <rect x="388" y="110" width="4" height="6" fill="rgba(14,110,138,.45)" rx="1"/>
+    <rect x="388" y="128" width="4" height="7" fill="rgba(14,110,138,.9)" rx="1"/>
+    <text x="398" y="92" font-size="8" fill="#3d5260" font-family="DM Sans">Pantalla</text>
+    <!-- d label -->
+    <line x1="115" y1="80" x2="115" y2="95" stroke="#888" stroke-width="1" marker-end="url(#ar2)"/>
+    <text x="118" y="90" font-size="8" fill="#555" font-family="DM Sans">d</text>
+    <!-- L label -->
+    <line x1="115" y1="14" x2="384" y2="14" stroke="#bbb" stroke-width="1"/>
+    <text x="245" y="12" font-size="8" fill="#888" font-family="DM Sans">L</text>
+    <!-- y_m label -->
+    <line x1="390" y1="88" x2="390" y2="72" stroke="#c77b1a" stroke-width="1.5" marker-end="url(#ar2)"/>
+    <text x="400" y="82" font-size="8" fill="#c77b1a" font-family="DM Sans">y_m</text>
+    <text x="30" y="165" font-size="9" fill="#3d5260" font-family="DM Sans">Fuente coherente</text>
+  </svg>
+  <h3>Posición de franjas brillantes (constructivas)</h3>
+  <div class="fbox">\[ y_m = \frac{m\lambda L}{d}, \quad m = 0,\pm1,\pm2,\ldots \]</div>
+  <h3>Posición de franjas oscuras (destructivas)</h3>
+  <div class="fbox">\[ y_m = \frac{(m+\tfrac{1}{2})\lambda L}{d} \]</div>
+  <h3>Separación entre franjas consecutivas</h3>
+  <div class="fbox">\[ \Delta y = \frac{\lambda L}{d} \]</div>
+  <div class="note">
+    <strong>Valores típicos:</strong> Para luz visible (\(\lambda\approx550\) nm), \(d=0.5\) mm, \(L=1\) m: \(\Delta y \approx 1.1\) mm. Las franjas son visibles a simple vista.
+  </div>
+  <div class="pgn">9</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+<div class="page pR graph" id="s6R">
+  <h2>10. Simulación 2D del Patrón de Interferencia</h2>
+  <p style="font-size:.83rem;color:var(--inkm);">Canvas con dos fuentes puntiformes. Las regiones brillantes (teal) indican interferencia constructiva; las oscuras, destructiva. Modifica los parámetros para ver cómo cambia el patrón.</p>
+  <canvas class="dcv" id="doubleCV" style="height:340px;"></canvas>
+  <div class="dash" style="padding:10px;margin-top:9px;">
+    <div class="ct">
+      <label>Separación fuentes (d) <span id="l2d">120 px</span></label>
+      <input type="range" id="s2d" min="20" max="220" step="5" value="120" oninput="upd2D()">
+    </div>
+    <div class="ct">
+      <label>Longitud de onda (λ) <span id="l2lam">28 px</span></label>
+      <input type="range" id="s2lam" min="8" max="60" step="2" value="28" oninput="upd2D()">
+    </div>
+  </div>
+  <div class="pgn">10</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+<!-- ===== SPREAD 7: TELEMETRÍA + APLICACIONES ===== -->
+<div class="page pL graph" id="s7L">
+  <h2>11. Telemetría y Espectro de Frecuencias</h2>
+  <p style="font-size:.82rem;color:var(--inkm);margin-bottom:5px;">Los gráficos reflejan los parámetros configurados en el panel de control del spread 5–6. Observa cómo cambia el espectro al cambiar el preset.</p>
+  <div class="cw" style="height:205px;">
+    <canvas id="chAmp"></canvas>
+  </div>
+  <div class="cw" style="height:205px;">
+    <canvas id="chSpec"></canvas>
+  </div>
+  <div class="pgn">11</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+<div class="page pR lined" id="s7R">
+  <h2>12. Aplicaciones Industriales y Tecnológicas</h2>
+  <h3>Control Activo de Ruido (ANC)</h3>
+  <p>Los audífonos con cancelación activa generan una <span class="hl">onda de oposición de fase</span> exacta al ruido ambiental. El resultado es interferencia destructiva que cancela el sonido indeseado. Requiere procesamiento digital en menos de 1 ms de latencia.</p>
+  <h3>Antenas Phased Array</h3>
+  <p>Los radares modernos usan arreglos de antenas que emiten con diferencias de fase controladas. La interferencia constructiva ocurre solo en la dirección deseada, formando un haz electrónico orientable sin partes móviles:</p>
+  <div class="fbox" style="font-size:.88rem;">\[ \theta_{max} = \arcsin\!\left(\frac{\Delta\varphi\,\lambda}{2\pi d}\right) \]</div>
+  <h3>Interferometría de Precisión</h3>
+  <p>El interferómetro de Michelson usa interferencia para medir desplazamientos con precisión de fracciones de nanómetro. <strong>LIGO</strong> detecta ondas gravitacionales con sensibilidad de \(10^{-18}\) m — mil veces menor que un protón.</p>
+  <h3>Control de Calidad Industrial</h3>
+  <p>La <strong>ESPI</strong> (Electronic Speckle Pattern Interferometry) detecta deformaciones submicrométricas en piezas sin contacto. Es esencial en aeronáutica, automotriz y manufactura de precisión.</p>
+  <h3>Ultrasonido Médico</h3>
+  <p>Los transductores en arrays de cristales piezoeléctricos aplican el principio de interferencia constructiva para enfocar haces de ultrasonido en tejidos profundos. La resolución axial es directamente proporcional a \(\lambda\).</p>
+  <h3>Comunicaciones Ópticas</h3>
+  <p>Los multiplexores WDM (Wavelength Division Multiplexing) usan interferencia para separar o combinar decenas de longitudes de onda en una sola fibra óptica, multiplicando el ancho de banda disponible.</p>
+  <div class="pgn">12</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+<!-- ===== SPREAD 8: AUTOEVALUACIÓN + REFERENCIAS ===== -->
+<div class="page pL lined" id="s8L">
+  <h2>13. Autoevaluación</h2>
+  <div class="qb">
+    <p>1. Dos ondas iguales (A₁=A₂=A) se superponen con Δφ=π. La amplitud resultante es:</p>
+    <label><input type="radio" name="q1" value="a"> a) 2A</label>
+    <label><input type="radio" name="q1" value="b"> b) √2·A</label>
+    <label><input type="radio" name="q1" value="c"> c) A</label>
+    <label><input type="radio" name="q1" value="d"> d) 0</label>
+    <div class="qr" id="r1"></div>
+  </div>
+  <div class="qb">
+    <p>2. Dos fuentes emiten 440 Hz y 444 Hz. La frecuencia de batido es:</p>
+    <label><input type="radio" name="q2" value="a"> a) 442 Hz</label>
+    <label><input type="radio" name="q2" value="b"> b) 884 Hz</label>
+    <label><input type="radio" name="q2" value="c"> c) 4 Hz</label>
+    <label><input type="radio" name="q2" value="d"> d) 2 Hz</label>
+    <div class="qr" id="r2"></div>
+  </div>
+  <div class="qb">
+    <p>3. En el experimento de Young, si se duplica la separación d entre rendijas, la separación Δy entre franjas:</p>
+    <label><input type="radio" name="q3" value="a"> a) Se duplica</label>
+    <label><input type="radio" name="q3" value="b"> b) Se reduce a la mitad</label>
+    <label><input type="radio" name="q3" value="c"> c) No cambia</label>
+    <label><input type="radio" name="q3" value="d"> d) Se cuadruplica</label>
+    <div class="qr" id="r3"></div>
+  </div>
+  <div class="qb">
+    <p>4. La interferencia destructiva implica que la energía total del sistema:</p>
+    <label><input type="radio" name="q4" value="a"> a) Se destruye completamente</label>
+    <label><input type="radio" name="q4" value="b"> b) Se convierte en calor</label>
+    <label><input type="radio" name="q4" value="c"> c) Se redistribuye espacialmente</label>
+    <label><input type="radio" name="q4" value="d"> d) Disminuye al 50%</label>
+    <div class="qr" id="r4"></div>
+  </div>
+  <div class="qb">
+    <p>5. El Control Activo de Ruido (ANC) se basa en el principio de:</p>
+    <label><input type="radio" name="q5" value="a"> a) Interferencia constructiva</label>
+    <label><input type="radio" name="q5" value="b"> b) Resonancia</label>
+    <label><input type="radio" name="q5" value="c"> c) Difracción</label>
+    <label><input type="radio" name="q5" value="d"> d) Interferencia destructiva</label>
+    <div class="qr" id="r5"></div>
+  </div>
+  <button class="qbtn" onclick="chkQ()">Verificar Respuestas</button>
+  <div class="pgn">13</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+<div class="page pR lined" id="s8R">
+  <h2>14. Glosario y Referencias</h2>
+  <h3>Glosario de Términos Clave</h3>
+  <table style="font-size:.79rem;">
+    <tr><td><strong>Interferencia</strong></td><td>Superposición de dos o más ondas coherentes que produce variación espacial de intensidad</td></tr>
+    <tr><td><strong>Coherencia</strong></td><td>Estabilidad de la diferencia de fase en el tiempo entre dos fuentes ondulatorias</td></tr>
+    <tr><td><strong>Batidos</strong></td><td>Modulación periódica de amplitud por diferencia entre frecuencias próximas</td></tr>
+    <tr><td><strong>Franja brillante</strong></td><td>Lugar geométrico donde ocurre interferencia constructiva (máximo de intensidad)</td></tr>
+    <tr><td><strong>Franja oscura</strong></td><td>Lugar geométrico donde ocurre interferencia destructiva (mínimo de intensidad)</td></tr>
+    <tr><td><strong>Diferencia de camino</strong></td><td>Diferencia de distancias recorridas por dos ondas desde sus fuentes hasta un punto</td></tr>
+    <tr><td><strong>Longitud de coherencia</strong></td><td>Distancia máxima sobre la que una fuente mantiene fase definida</td></tr>
+  </table>
+  <hr class="d">
+  <h3>Referencias Bibliográficas</h3>
+  <ol style="font-size:.79rem;line-height:1.85;">
+    <li>Serway, R. A. y Jewett, J. W. (2018). <em>Física para Ciencias e Ingeniería</em> (10a ed.). Cengage Learning. Cap. 17–18.</li>
+    <li>Halliday, D., Resnick, R. y Walker, J. (2021). <em>Fundamentals of Physics</em> (11a ed.). Wiley. Cap. 35–36.</li>
+    <li>Hecht, E. (2017). <em>Optics</em> (5a ed.). Pearson Education. Cap. 7–9.</li>
+    <li>French, A. P. (1971). <em>Vibrations and Waves.</em> MIT Press.</li>
+    <li>Kinsler, L. E. et al. (1999). <em>Fundamentals of Acoustics</em> (4a ed.). Wiley. Cap. 6.</li>
+    <li>Born, M. y Wolf, E. (2013). <em>Principles of Optics</em> (7a ed.). Cambridge University Press. Cap. 10.</li>
+  </ol>
+  <div style="margin-top:14px;padding:10px;border:1px solid rgba(200,144,64,.4);border-radius:4px;font-size:.69rem;text-align:center;color:var(--inkm);">
+    © 2026 Oscar Alejandro Ramírez Espinosa y Jeny Maritza Mora Cardona.<br>
+    Todos los derechos reservados. Prohibida la reproducción sin autorización expresa de los autores.
+  </div>
+  <div class="pgn">14</div>
+  <div class="pgf">© 2026 Ramírez Espinosa · Mora Cardona</div>
+</div>
+
+</div><!-- end .pa -->
+
+<!-- NAV BUTTONS -->
+<button class="nb-btn" id="nprev" onclick="flip(-1)" disabled>&#9668; Anterior</button>
+<button class="nb-btn" id="nidx" onclick="gIdx()">&#128203; Indice</button>
+<button class="nb-btn" id="nnext" onclick="flip(1)">Siguiente &#9658;</button>
+
+</div><!-- end .nb -->
+</div><!-- end .nw -->
+</div><!-- end #main -->
+
+<!-- SEARCH OVERLAY -->
+<div id="so">
+  <div class="sb2">
+    <h3 style="margin-bottom:8px;font-family:var(--fd);">Buscar en el Cuaderno</h3>
+    <input type="text" id="sinp" placeholder="Escribe un termino..." oninput="doSrch(this.value)" onkeydown="if(event.key==='Escape')tSrch()">
+    <div id="sr"></div>
+    <button onclick="tSrch()" style="margin-top:8px;background:#eee;border:none;padding:5px 13px;border-radius:4px;cursor:pointer;font-size:.82rem;">Cerrar</button>
+  </div>
+</div>
+
+<!-- NOTES PANEL -->
+<div id="np">
+  <h4>Notas Personales</h4>
+  <p style="font-size:.73rem;color:#888;margin-bottom:6px;">Guardadas automaticamente en el navegador.</p>
+  <textarea id="ntx" placeholder="Escribe aqui tus notas..." oninput="saveN()"></textarea>
+  <button onclick="tNotes()" style="margin-top:6px;background:#eee;border:none;padding:5px;border-radius:4px;cursor:pointer;font-size:.79rem;width:100%;">Cerrar</button>
+</div>
+
+<!-- TIMER -->
+<div id="tw">
+  <span id="tdisp">00:00</span>
+  <button onclick="rstT()" style="background:none;border:1px solid var(--gold);color:var(--gold);padding:2px 7px;border-radius:3px;cursor:pointer;font-size:.71rem;">Reset</button>
+</div>
+
+<!-- CHATBOT -->
+<div id="chat">
+  <div class="cp" id="cpanel">
+    <div class="ch">
+      <span>Tutor — Interferencia de Ondas</span>
+      <span style="cursor:pointer" onclick="tChat()">X</span>
+    </div>
+    <div class="cb" id="cbody">
+      <div class="msg mai">Hola! Soy tu tutor de Interferencia de Ondas. Preguntame sobre superposicion, interferencia constructiva/destructiva, batidos, el experimento de Young o sus aplicaciones industriales.</div>
+    </div>
+    <div class="ci">
+      <input type="text" id="cinp" placeholder="Escribe tu pregunta..." onkeypress="if(event.key==='Enter')sndChat()">
+      <button onclick="sndChat()">&#10148;</button>
+    </div>
+  </div>
+  <div class="cfab" onclick="tChat()">&#128172;</div>
+</div>
+
+<script>
+/* ===================== STATE ===================== */
+const NS=9; let cur=0,flipping=false,dmOn=false;
+let tSec=0,tRun=false,tIv=null;
+let aCtx=null,bOsc1=null,bOsc2=null,bGain=null,bAudOn=false;
+let simOn=false,tAnim=0,lastTS=0;
+let chAmpH=null,chSpecH=null,beatChH=null;
+let d2=120,lam2=28,d2Dirty=true;
+let P={a1:1,a2:1,f1:2,f2:2,phi:0};
+let BP={f1:2,f2:2.5,amp:1};
+
+const SP=[
+  ['s0L','s0R'],['s1L','s1R'],['s2L','s2R'],['s3L','s3R'],
+  ['s4L','s4R'],['s5L','s5R'],['s6L','s6R'],['s7L','s7R'],['s8L','s8R']
+];
+
+/* ===================== NAVIGATION ===================== */
+function openBook(){
+  document.getElementById('splash').classList.add('gone');
+  setTimeout(initAll,300);
+}
+function flip(dir){
+  if(flipping)return;
+  const nx=cur+dir;
+  if(nx<0||nx>=NS)return;
+  flipping=true;
+  const[cL,cR]=SP[cur].map(id=>document.getElementById(id));
+  const[nL,nR]=SP[nx].map(id=>document.getElementById(id));
+  if(dir>0){cR.classList.add('aNO');nL.classList.add('aNI');}
+  else{cL.classList.add('aPO');nR.classList.add('aPI');}
+  setTimeout(()=>{
+    ['aNO','aNI','aPO','aPI','on'].forEach(c=>{cL.classList.remove(c);cR.classList.remove(c);});
+    nL.classList.remove('aNO','aNI','aPO','aPI');
+    nR.classList.remove('aNO','aNI','aPO','aPI');
+    nL.classList.add('on'); nR.classList.add('on');
+    cur=nx; flipping=false; updNav();
+  },820);
+}
+function gSpread(n){
+  if(n===cur||flipping)return;
+  const d=n>cur?1:-1;
+  (function step(){if(cur===n)return;flip(d);setTimeout(step,850);})();
+}
+function gIdx(){gSpread(1);}
+function updNav(){
+  ['nprev','tp'].forEach(id=>{const el=document.getElementById(id);if(el)el.disabled=cur===0;});
+  ['nnext','tn'].forEach(id=>{const el=document.getElementById(id);if(el)el.disabled=cur===NS-1;});
+  const labels=['Portada','Indice','Pags 1-2','Pags 3-4','Pags 5-6','Pags 7-8','Pags 9-10','Pags 11-12','Pags 13-14'];
+  const pi=document.getElementById('pgi');
+  if(pi)pi.textContent=labels[cur]||'Pag '+(cur*2-1)+'-'+(cur*2);
+  const pb=document.getElementById('pb');
+  if(pb)pb.style.width=((cur/(NS-1))*100)+'%';
+}
+
+/* ===================== DARK MODE ===================== */
+function tDM(){
+  dmOn=!dmOn;
+  document.body.classList.toggle('dm',dmOn);
+  const b=document.getElementById('tdm');
+  if(b){b.textContent=dmOn?'Sol Claro':'Luna Oscuro';b.classList.toggle('on',dmOn);}
+}
+
+/* ===================== SPINE ===================== */
+function buildSpine(){
+  const s=document.getElementById('spn');
+  if(!s)return;
+  for(let i=0;i<14;i++){
+    const r=document.createElement('div');r.className='ring';
+    s.insertBefore(r,s.querySelector('.slbl'));
+  }
+}
+
+/* ===================== SCREENSHOT ===================== */
+function doShot(){
+  if(typeof html2canvas==='undefined')return;
+  html2canvas(document.getElementById('nbc'),{scale:1.4}).then(c=>{
+    const a=document.createElement('a');
+    a.href=c.toDataURL('image/png');
+    a.download='interferencia-ondas.png';
+    a.click();
+  });
+}
+
+/* ===================== SEARCH ===================== */
+const SIDX=[
+  {t:'Principio de Superposicion',pg:1,sp:2},
+  {t:'Amplitud resultante A_R formula',pg:1,sp:2},
+  {t:'Representacion con fasores',pg:1,sp:2},
+  {t:'Interferencia Constructiva definicion',pg:2,sp:2},
+  {t:'Interferencia Destructiva definicion',pg:2,sp:2},
+  {t:'Interferencia Parcial',pg:2,sp:2},
+  {t:'Conservacion de energia en interferencia',pg:2,sp:2},
+  {t:'Condicion constructiva diferencia de camino',pg:3,sp:3},
+  {t:'Coherencia temporal y espacial',pg:3,sp:3},
+  {t:'Division de frente de onda Young Michelson',pg:3,sp:3},
+  {t:'Condicion destructiva semientero de lambda',pg:4,sp:3},
+  {t:'Diagrama fasorial constructiva destructiva',pg:4,sp:3},
+  {t:'Panel de control simulacion superposicion 1D',pg:5,sp:4},
+  {t:'Preajustes constructiva destructiva batidos parcial',pg:5,sp:4},
+  {t:'Simulacion analitica de superposicion canvas',pg:6,sp:4},
+  {t:'Batidos acusticos teoria formula',pg:7,sp:5},
+  {t:'Frecuencia de batido f_bat formula',pg:7,sp:5},
+  {t:'Percepcion auditiva de batidos tabla',pg:7,sp:5},
+  {t:'Ejemplo afinar guitarra batidos',pg:7,sp:5},
+  {t:'Simulador de batidos audio Web API',pg:8,sp:5},
+  {t:'Experimento de Young doble rendija 1801',pg:9,sp:6},
+  {t:'Posicion de franjas brillantes Young',pg:9,sp:6},
+  {t:'Separacion entre franjas delta y formula',pg:9,sp:6},
+  {t:'Simulacion 2D patron de interferencia',pg:10,sp:6},
+  {t:'Telemetria amplitudes espectro frecuencias',pg:11,sp:7},
+  {t:'Control Activo de Ruido ANC',pg:12,sp:7},
+  {t:'Antenas Phased Array radar',pg:12,sp:7},
+  {t:'Interferometria de precision LIGO',pg:12,sp:7},
+  {t:'ESPI control de calidad industrial',pg:12,sp:7},
+  {t:'Ultrasonido medico transductores',pg:12,sp:7},
+  {t:'Comunicaciones opticas WDM',pg:12,sp:7},
+  {t:'Autoevaluacion preguntas respuestas',pg:13,sp:8},
+  {t:'Glosario terminos interferencia',pg:14,sp:8},
+  {t:'Referencias bibliograficas',pg:14,sp:8},
+];
+function tSrch(){
+  const el=document.getElementById('so');
+  el.classList.toggle('open');
+  if(el.classList.contains('open')){const si=document.getElementById('sinp');if(si)si.focus();}
+}
+function doSrch(q){
+  const res=document.getElementById('sr');
+  if(!q.trim()){res.innerHTML='';return;}
+  const hits=SIDX.filter(e=>e.t.toLowerCase().includes(q.toLowerCase()));
+  if(!hits.length){res.innerHTML='<p style="color:#888;font-size:.82rem;padding:7px;">Sin resultados.</p>';return;}
+  res.innerHTML=hits.slice(0,10).map(h=>
+    `<div class="si" onclick="gSpread(${h.sp});tSrch();">${h.t}<div class="sp2">Pagina ${h.pg}</div></div>`
+  ).join('');
+}
+
+/* ===================== NOTES ===================== */
+function tNotes(){document.getElementById('np').classList.toggle('open');}
+function saveN(){try{localStorage.setItem('interf-notes',document.getElementById('ntx').value);}catch(e){}}
+function loadN(){try{const n=localStorage.getItem('interf-notes');if(n)document.getElementById('ntx').value=n;}catch(e){}}
+
+/* ===================== TIMER ===================== */
+function tTimer(){
+  const w=document.getElementById('tw');
+  w.classList.toggle('open');
+  if(w.classList.contains('open')&&!tRun)startT();
+}
+function startT(){tRun=true;tIv=setInterval(()=>{tSec++;const m=Math.floor(tSec/60),s=tSec%60;const d=document.getElementById('tdisp');if(d)d.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');},1000);}
+function rstT(){clearInterval(tIv);tSec=0;tRun=false;const d=document.getElementById('tdisp');if(d)d.textContent='00:00';startT();}
+
+/* ===================== CHATBOT ===================== */
+const CR=[
+  "La interferencia constructiva ocurre cuando la diferencia de fase es multiplo par de pi (0, 2pi, 4pi...). Equivale a que la diferencia de camino sea Deltar = m*lambda. La amplitud resultante es A_R = A1 + A2.",
+  "La interferencia destructiva ocurre cuando la diferencia de fase es multiplo impar de pi (pi, 3pi...). Equivale a Deltar = (m + 1/2)*lambda. Si las amplitudes son iguales, se cancelan totalmente: A_R = 0.",
+  "Los batidos son el resultado de superponer dos ondas de frecuencias ligeramente distintas. La frecuencia de batido es f_b = |f1 - f2|. Si tocas La4 (440 Hz) junto a 443 Hz, escuchas 3 pulsaciones por segundo.",
+  "El experimento de Young de 1801 demostro la naturaleza ondulatoria de la luz con dos rendijas. La separacion entre franjas es Deltay = lambda * L / d. Al duplicar d, las franjas se acercan; al aumentar L, se alejan.",
+  "La energia NO se destruye en la interferencia destructiva. Se redistribuye: donde hay amplitud nula (destructiva), la energia aparece amplificada en otras regiones (constructiva). La energia total se conserva siempre.",
+  "El Control Activo de Ruido (ANC) genera una onda de exactamente oposicion de fase al ruido ambiental. El resultado es interferencia destructiva que cancela el sonido. Requiere procesamiento en menos de 1 ms.",
+  "La coherencia es la condicion para que la interferencia sea estable. Dos ondas son coherentes si mantienen una diferencia de fase constante en el tiempo. Los laseres son muy coherentes; la luz solar, muy poco.",
+];
+let cIdx=0;
+function tChat(){document.getElementById('cpanel').classList.toggle('open');}
+function sndChat(){
+  const inp=document.getElementById('cinp');
+  const body=document.getElementById('cbody');
+  if(!inp||!inp.value.trim())return;
+  const um=document.createElement('div');um.className='msg mu';um.textContent=inp.value;
+  body.appendChild(um);inp.value='';
+  setTimeout(()=>{
+    const bm=document.createElement('div');bm.className='msg mai';
+    bm.textContent=CR[cIdx%CR.length];cIdx++;
+    body.appendChild(bm);body.scrollTop=body.scrollHeight;
+  },650);
+  body.scrollTop=body.scrollHeight;
+}
+
+/* ===================== QUIZ ===================== */
+function chkQ(){
+  const ans={q1:'d',q2:'c',q3:'b',q4:'c',q5:'d'};
+  for(const[q,c]of Object.entries(ans)){
+    const sel=document.querySelector(`input[name="${q}"]:checked`);
+    const el=document.getElementById('r'+q[1]);
+    if(!el)continue;
+    if(!sel){el.textContent='Selecciona una opcion.';el.style.color='#c77b1a';}
+    else if(sel.value===c){el.textContent='Correcto!';el.style.color='#1e8a4a';}
+    else{el.textContent='Incorrecto. Respuesta correcta: '+c.toUpperCase();el.style.color='#b03020';}
+  }
+}
+
+/* ===================== SIM 1D ===================== */
+function updSim(){
+  P.a1=parseFloat(document.getElementById('sA1').value);
+  P.a2=parseFloat(document.getElementById('sA2').value);
+  P.f1=parseFloat(document.getElementById('sF1').value);
+  P.f2=parseFloat(document.getElementById('sF2').value);
+  P.phi=parseFloat(document.getElementById('sPhi').value)*Math.PI/180;
+  document.getElementById('lA1').textContent=P.a1.toFixed(2);
+  document.getElementById('lA2').textContent=P.a2.toFixed(2);
+  document.getElementById('lF1').textContent=P.f1.toFixed(1);
+  document.getElementById('lF2').textContent=P.f2.toFixed(1);
+  document.getElementById('lPhi').textContent=(P.phi*180/Math.PI).toFixed(0)+'deg';
+  const AR=Math.sqrt(P.a1*P.a1+P.a2*P.a2+2*P.a1*P.a2*Math.cos(P.phi));
+  const norm=AR/(P.a1+P.a2);
+  const tipo=norm>0.95?'Const.':(norm<0.05?'Dest.':'Parcial');
+  const fb=Math.abs(P.f1-P.f2);
+  document.getElementById('vAr').textContent=AR.toFixed(2);
+  document.getElementById('vPhi').textContent=(P.phi*180/Math.PI).toFixed(0)+'deg';
+  document.getElementById('vTipo').textContent=tipo;
+  document.getElementById('vFb').textContent=fb>0.01?fb.toFixed(2):'--';
+  updSpecChart();
+}
+function setP(t,el){
+  document.querySelectorAll('.hb').forEach(b=>b.classList.remove('sel'));
+  if(el)el.classList.add('sel');
+  if(t==='const'){document.getElementById('sPhi').value=0;document.getElementById('sF1').value=2;document.getElementById('sF2').value=2;document.getElementById('sA1').value=1;document.getElementById('sA2').value=1;}
+  else if(t==='dest'){document.getElementById('sPhi').value=180;document.getElementById('sF1').value=2;document.getElementById('sF2').value=2;document.getElementById('sA1').value=1;document.getElementById('sA2').value=1;}
+  else if(t==='beat'){document.getElementById('sPhi').value=0;document.getElementById('sF1').value=2;document.getElementById('sF2').value=2.5;document.getElementById('sA1').value=1;document.getElementById('sA2').value=1;}
+  else{document.getElementById('sPhi').value=90;document.getElementById('sF1').value=3;document.getElementById('sF2').value=3;document.getElementById('sA1').value=1;document.getElementById('sA2').value=0.6;}
+  updSim();
+}
+
+/* ===================== BEAT CONTROLS ===================== */
+function updB(){
+  BP.f1=parseFloat(document.getElementById('sBf1').value);
+  BP.f2=parseFloat(document.getElementById('sBf2').value);
+  BP.amp=parseFloat(document.getElementById('sBamp').value);
+  const fb=Math.abs(BP.f1-BP.f2);
+  const tb=fb>0?(1/fb).toFixed(2):'inf';
+  document.getElementById('lBf1').textContent=BP.f1.toFixed(1)+' Hz';
+  document.getElementById('lBf2').textContent=BP.f2.toFixed(1)+' Hz';
+  document.getElementById('vBf1').textContent=BP.f1.toFixed(1);
+  document.getElementById('vBf2').textContent=BP.f2.toFixed(1);
+  document.getElementById('vBfb').textContent=fb.toFixed(2);
+  document.getElementById('vBT').textContent=tb;
+  document.getElementById('lBamp').textContent=BP.amp.toFixed(2);
+  if(bAudOn&&bOsc1&&bOsc2){
+    bOsc1.frequency.setValueAtTime(BP.f1*180,aCtx.currentTime);
+    bOsc2.frequency.setValueAtTime(BP.f2*180,aCtx.currentTime);
+    bGain.gain.setValueAtTime(BP.amp*0.22,aCtx.currentTime);
+  }
+  if(beatChH){
+    const pts=Array.from({length:300},(_,i)=>{
+      const t=i/60;
+      return BP.amp*(Math.cos(2*Math.PI*BP.f1*t)+Math.cos(2*Math.PI*BP.f2*t));
+    });
+    beatChH.data.datasets[0].data=pts;
+    beatChH.update('none');
+  }
+}
+function togAudio(){
+  if(!aCtx)aCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(aCtx.state==='suspended')aCtx.resume();
+  if(bAudOn){
+    try{bOsc1.stop();bOsc2.stop();}catch(e){}
+    bOsc1=bOsc2=bGain=null;bAudOn=false;
+    const b=document.getElementById('btnAud');if(b)b.textContent='Activar Audio de Batidos';
+  }else{
+    bGain=aCtx.createGain();
+    bGain.gain.setValueAtTime(BP.amp*0.22,aCtx.currentTime);
+    bGain.connect(aCtx.destination);
+    bOsc1=aCtx.createOscillator();bOsc1.type='sine';
+    bOsc1.frequency.setValueAtTime(BP.f1*180,aCtx.currentTime);
+    bOsc2=aCtx.createOscillator();bOsc2.type='sine';
+    bOsc2.frequency.setValueAtTime(BP.f2*180,aCtx.currentTime);
+    bOsc1.connect(bGain);bOsc2.connect(bGain);
+    bOsc1.start();bOsc2.start();
+    bAudOn=true;
+    const b=document.getElementById('btnAud');if(b)b.textContent='Desactivar Audio';
+  }
+}
+
+/* ===================== 2D INTERFERENCE ===================== */
+function upd2D(){
+  d2=parseInt(document.getElementById('s2d').value);
+  lam2=parseInt(document.getElementById('s2lam').value);
+  document.getElementById('l2d').textContent=d2+' px';
+  document.getElementById('l2lam').textContent=lam2+' px';
+  d2Dirty=true;
+}
+function draw2D(){
+  const cv=document.getElementById('doubleCV');
+  if(!cv||!d2Dirty)return;
+  d2Dirty=false;
+  const ctx=cv.getContext('2d');
+  const W=cv.offsetWidth,H=cv.offsetHeight;
+  if(W<2||H<2)return;
+  cv.width=W;cv.height=H;
+  const cx=W/2,cy=H/2;
+  const s1x=cx,s1y=cy-d2/2;
+  const s2x=cx,s2y=cy+d2/2;
+  const imgD=ctx.createImageData(W,H);
+  const data=imgD.data;
+  for(let y=0;y<H;y++){
+    for(let x=0;x<W;x++){
+      const r1=Math.hypot(x-s1x,y-s1y);
+      const r2=Math.hypot(x-s2x,y-s2y);
+      const dr=r1-r2;
+      const phase=(dr/lam2)*2*Math.PI;
+      const amp=Math.cos(phase/2);
+      const I=amp*amp;
+      const idx=(y*W+x)*4;
+      data[idx]=Math.round(I*14);
+      data[idx+1]=Math.round(I*110);
+      data[idx+2]=Math.round(I*138+(1-I)*18);
+      data[idx+3]=255;
+    }
+  }
+  ctx.putImageData(imgD,0,0);
+  [[s1x,s1y,'rgba(14,110,138,.95)'],[s2x,s2y,'rgba(200,144,64,.95)']].forEach(([sx,sy,fc])=>{
+    ctx.beginPath();ctx.arc(sx,sy,7,0,2*Math.PI);
+    ctx.fillStyle=fc;ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.8)';ctx.lineWidth=1.5;ctx.stroke();
+  });
+  ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='10px DM Sans,sans-serif';
+  ctx.fillText('d='+d2+'px  lam='+lam2+'px',7,16);
+}
+function d2Loop(){draw2D();requestAnimationFrame(d2Loop);}
+
+/* ===================== CHARTS ===================== */
+function updSpecChart(){
+  if(!chSpecH)return;
+  const fb=Math.abs(P.f1-P.f2);
+  const AR=Math.sqrt(P.a1*P.a1+P.a2*P.a2+2*P.a1*P.a2*Math.cos(P.phi));
+  chSpecH.data.labels=['f1='+P.f1.toFixed(1),'f2='+P.f2.toFixed(1),'AR'];
+  chSpecH.data.datasets[0].data=[P.a1,P.a2,0];
+  chSpecH.data.datasets[1].data=[0,0,AR];
+  chSpecH.update('none');
+}
+function initCharts(){
+  const opts={animation:false,responsive:true,maintainAspectRatio:false};
+  const chAmpEl=document.getElementById('chAmp');
+  if(chAmpEl){
+    chAmpH=new Chart(chAmpEl.getContext('2d'),{
+      type:'line',
+      data:{labels:Array.from({length:200},(_,i)=>i),datasets:[{
+        label:'Amplitud Resultante y(t)',data:[],
+        borderColor:'rgba(14,110,138,.9)',pointRadius:0,borderWidth:2,
+        fill:true,backgroundColor:'rgba(14,110,138,.1)'
+      }]},
+      options:{...opts,scales:{y:{min:-2.2,max:2.2},x:{display:false}},plugins:{legend:{labels:{font:{size:10}}}}}
+    });
+  }
+  const chSpecEl=document.getElementById('chSpec');
+  if(chSpecEl){
+    chSpecH=new Chart(chSpecEl.getContext('2d'),{
+      type:'bar',
+      data:{
+        labels:['f1','f2','AR'],
+        datasets:[
+          {label:'Ondas individuales',data:[1,1,0],backgroundColor:'rgba(14,110,138,.65)'},
+          {label:'Resultante',data:[0,0,2],backgroundColor:'rgba(200,144,64,.75)'}
+        ]
+      },
+      options:{...opts,plugins:{legend:{labels:{font:{size:10}}}}}
+    });
+  }
+  const beatEl=document.getElementById('beatCh');
+  if(beatEl){
+    beatChH=new Chart(beatEl.getContext('2d'),{
+      type:'line',
+      data:{labels:Array.from({length:300},(_,i)=>(i/60).toFixed(2)),datasets:[{
+        label:'Batidos (superposicion)',data:[],
+        borderColor:'rgba(200,144,64,.9)',pointRadius:0,borderWidth:2,
+        fill:true,backgroundColor:'rgba(200,144,64,.1)'
+      }]},
+      options:{...opts,scales:{y:{min:-2.2,max:2.2},x:{ticks:{maxTicksLimit:7}}},plugins:{legend:{labels:{font:{size:10}}}}}
+    });
+  }
+  updSpecChart();
+  updB();
+}
+
+/* ===================== MAIN LOOP ===================== */
+function simLoop(ts){
+  const dt=Math.min((ts-lastTS)/1000,0.05);
+  lastTS=ts; tAnim+=dt;
+  const cv=document.getElementById('simCV');
+  if(cv){
+    const ctx=cv.getContext('2d');
+    const W=cv.offsetWidth,H=cv.offsetHeight;
+    cv.width=W;cv.height=H;
+    const mid=H/2,sc=Math.min(mid*0.75,110);
+    const k=2*Math.PI/100;
+    ctx.fillStyle=dmOn?'#0a1820':'#ffffff';ctx.fillRect(0,0,W,H);
+    for(let yg=0;yg<H;yg+=H/6){
+      ctx.strokeStyle=dmOn?'rgba(255,255,255,.04)':'rgba(200,210,220,.5)';
+      ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,yg);ctx.lineTo(W,yg);ctx.stroke();
+    }
+    ctx.strokeStyle='rgba(150,160,170,.35)';ctx.setLineDash([5,5]);ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(0,mid);ctx.lineTo(W,mid);ctx.stroke();ctx.setLineDash([]);
+    const w1=2*Math.PI*P.f1,w2=2*Math.PI*P.f2;
+    const showC=document.getElementById('chkC')&&document.getElementById('chkC').checked;
+    if(showC){
+      ctx.beginPath();ctx.strokeStyle='rgba(14,110,138,.5)';ctx.lineWidth=1.7;
+      for(let x=0;x<=W;x++){const v=sc*P.a1*Math.cos(k*x-w1*tAnim);x===0?ctx.moveTo(x,mid-v):ctx.lineTo(x,mid-v);}
+      ctx.stroke();
+      ctx.beginPath();ctx.strokeStyle='rgba(200,144,64,.5)';ctx.lineWidth=1.7;
+      for(let x=0;x<=W;x++){const v=sc*P.a2*Math.cos(k*x-w2*tAnim+P.phi);x===0?ctx.moveTo(x,mid-v):ctx.lineTo(x,mid-v);}
+      ctx.stroke();
+    }
+    ctx.beginPath();ctx.strokeStyle=dmOn?'#7fd8e8':'#1c2b33';ctx.lineWidth=2.8;
+    for(let x=0;x<=W;x++){
+      const v1=sc*P.a1*Math.cos(k*x-w1*tAnim);
+      const v2=sc*P.a2*Math.cos(k*x-w2*tAnim+P.phi);
+      x===0?ctx.moveTo(x,mid-(v1+v2)):ctx.lineTo(x,mid-(v1+v2));
+    }
+    ctx.stroke();
+    ctx.fillStyle=dmOn?'rgba(100,180,200,.75)':'rgba(14,110,138,.65)';
+    ctx.font='10px DM Sans,sans-serif';
+    ctx.fillText('f1='+P.f1.toFixed(1)+'Hz A1='+P.a1.toFixed(2),7,15);
+    ctx.fillStyle=dmOn?'rgba(220,180,100,.75)':'rgba(180,120,20,.8)';
+    ctx.fillText('f2='+P.f2.toFixed(1)+'Hz A2='+P.a2.toFixed(2)+' phi='+Math.round(P.phi*180/Math.PI)+'deg',7,28);
+  }
+  if(chAmpH){
+    const data=Array.from({length:200},(_,i)=>{
+      const x=i/200;
+      return P.a1*Math.cos(2*Math.PI*P.f1*x)+P.a2*Math.cos(2*Math.PI*P.f2*x+P.phi);
+    });
+    chAmpH.data.datasets[0].data=data;chAmpH.update('none');
+  }
+  requestAnimationFrame(simLoop);
+}
+
+/* ===================== INIT ===================== */
+function initAll(){
+  if(simOn)return;simOn=true;
+  initCharts();updSim();
+  requestAnimationFrame(simLoop);
+  requestAnimationFrame(d2Loop);
+}
+window.addEventListener('DOMContentLoaded',()=>{
+  buildSpine();updNav();loadN();startT();
+  document.addEventListener('keydown',e=>{
+    if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+    if(e.key==='ArrowRight'||e.key==='ArrowDown')flip(1);
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp')flip(-1);
+    if(e.key==='Escape'){document.getElementById('so').classList.remove('open');}
+  });
+});
+</script>
+</body>
+</html>
